@@ -150,7 +150,6 @@ function renderImages(images) {
     }
 
     resizeAllImage();
-
 }
 
 isReading = false;

@@ -15,7 +15,7 @@ wir.getImagesInfo = function (callback) {
         return eles[0].innerHTML;
       }
     }
-    return null;
+    return "";
   }
 
   var title = getTitle();
