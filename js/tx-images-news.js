@@ -1,9 +1,14 @@
-function getTxImageNewInfo(callback) {
+var wir = wir || {};
+
+wir.name = "Tencent Image News";
+
+wir.getImagesInfo = function (callback) {
   // http://news.qq.com/a/date/news_id.htm#p=N?
   // new images news_id.hdBigPic.js
   var getTitle = function() {
     var titleDiv = getElementsByClassName('title', 'div');
-    console.info(titleDiv);
+    //var titileDiv = $("div.title"); ???
+    //console.info(titleDiv);
     if ( titleDiv != null ) {
       var eles = titleDiv[0].getElementsByTagName('h1');
       if ( eles.length == 1 ) {
@@ -39,6 +44,7 @@ function getTxImageNewInfo(callback) {
   }
 
   var path = window.location.pathname;
+  var host = window.location.host;
   var ary = path.split('/');
   if ( ary.length == 4 && ary[3].indexOf('.htm') != -1 ) {
     var tmp = ary[3].split('.');
@@ -49,8 +55,9 @@ function getTxImageNewInfo(callback) {
       req.onreadystatechange = function() {
         if ( req.readyState == 4 ) {
           if (  req.status == 200 ) {
-            //callback(null, txImageInfoTran(eval("("+req.responseText+")")));
-            callback(null, txImageInfoTran(window.JSON.parse(req.responseText)));
+            callback(null, txImageInfoTran(eval("("+req.responseText+")")));
+            //callback(null, txImageInfoTran(window.JSON.parse(req.responseText)));
+            //callback(null, txImageInfoTran(jQuery.parseJSON(req.responseText)));
           }else {
             callback(new Error('http error code: ' + req.status), null);
           }
@@ -64,10 +71,4 @@ function getTxImageNewInfo(callback) {
   } else {
     callback(new Error('parse tencent image news path error'), null);
   }
-}
-
-if ( window.hasOwnProperty("wir") ) {
-  window.wir.getImagesInfo = getTxImageNewInfo;
-} else {
-  window.wir = { getImagesInfo: getTxImageNewInfo }
 }

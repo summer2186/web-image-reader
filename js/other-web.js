@@ -1,9 +1,7 @@
-function otherGetAllImages() {
+var wir = wir || {};
 
-}
+wir.name = "Other Web Page";
 
-if ( window.hasOwnProperty("wir") && !window.wir.hasOwnProperty(getImagesInfo) ) {
-  window.wir.getImagesInfo = otherGetAllImages;
-} else {
-  window.wir = { getImagesInfo: otherGetAllImages }
+wir.otherGetAllImages = function(callback) {
+  callback(null, null);
 }
