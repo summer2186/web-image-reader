@@ -99,7 +99,7 @@ function renderImages(images) {
       var imgCnt = 1;
       images.images.forEach(function(img){
         var imtCntStr = " ( " + (imgCnt++) + " / " + images.images.length + " )";
-        html += "<tr class=\"wirTR\"><td class=\"wirTD\"><img src=\"" +　img.url + "\"/></tr></td>";
+        html += "<tr class=\"wirTR\"><td class=\"wirTD\"><img class=\"wirImg\" src=\"" +　img.url + "\"/></tr></td>";
         html += "<tr class=\"wirTR\"><td class=\"wirTD\">" +　img.desc + imtCntStr + "</tr></td>";
         table.innerHTML = html;
       });
@@ -116,7 +116,7 @@ function renderImages(images) {
       var imgCnt = 1;
       images.images.forEach(function(img){
         var imtCntStr = " ( " + (imgCnt++) + " / " + images.images.length + " )";
-        html += "<tr class=\"wirTR\"><td class=\"wirTD\"><img src=\"" +　img.url + "\"/></tr></td>";
+        html += "<tr class=\"wirTR\"><td class=\"wirTD\"><img class=\"wirImg\" src=\"" +　img.url + "\"/></tr></td>";
         html += "<tr class=\"wirTR\"><td class=\"wirTD\">" +　img.desc + imtCntStr + "</tr></td>";
         table.innerHTML = html;
       });
@@ -136,6 +136,20 @@ function renderImages(images) {
     }else {
       document.body.appendChild(renderAsMatrix());
     }
+
+    // 重新调整图片大小，以适应窗口大小
+    var resizeAllImage = function() {
+      $('img').each(function () {
+        // console.info($(this));
+        if ( $(this).attr('naturalWidth') >= document.body.clientWidth ) {
+          $(this).attr('width', '100%');
+        } else {
+          // $(this).attr('width', '100%');
+        }
+      });
+    }
+
+    resizeAllImage();
 
 }
 

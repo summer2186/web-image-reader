@@ -39,3 +39,8 @@
   text-align: center;
   vertical-align: top;
 }
+
+.wirImg {
+  max-width: document.body.clientWidth;
+  width:expression_r(document.body.clientWidth > 780? "780px": "auto" );
+}
