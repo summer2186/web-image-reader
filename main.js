@@ -26,6 +26,7 @@ function isTxImageNews(host, path, callback) {
 images struct
 {
  title: article_title,
+ type: 'list|matrix',
  images:[
     {url: "", title:"", desc: ""}
   ]
@@ -48,7 +49,7 @@ function getTxImageNewInfo(host, path, callback) {
   }
 
   var title = getTitle();
-  var images = { title: title, images: [] };
+  var images = { title: title, type: 'list', images: [] };
 
   var txImageInfoTran = function(txImageInfo) {
     var findEleByName = function(ary, name) {
@@ -73,7 +74,6 @@ function getTxImageNewInfo(host, path, callback) {
   }
 
   var ary = path.split('/');
-  console.log(ary);
   if ( ary.length == 4 && ary[3].indexOf('.htm') != -1 ) {
     var tmp = ary[3].split('.');
     if ( tmp.length == 2 ) {
@@ -83,19 +83,19 @@ function getTxImageNewInfo(host, path, callback) {
       req.onreadystatechange = function() {
         if ( req.readyState == 4 ) {
           if (  req.status == 200 ) {
-            callback(txImageInfoTran(eval("("+req.responseText+")")));
+            callback(null, txImageInfoTran(eval("("+req.responseText+")")));
           }else {
-            callback(null);
+            callback(new Error('http error code: ' + req.status), null);
           }
         }
       }
       req.open('GET', url, true);
       req.send();
     } else {
-      callback(null);
+      callback(new Error('parse tencent image news path error'), null);
     }
   } else {
-    callback(null);
+    callback(new Error('parse tencent image news path error'), null);
   }
 }
 
@@ -113,27 +113,48 @@ var imagesInfoProcessorTable = [
 ];
 
 // 获取所有的图片信息
-function getImagesInfo() {
+function getImagesInfo(callback) {
   var host = window.location.host;
   var path = window.location.pathname;
   var imagesInfo = null
-  console.log("lookup for:" + host + "　　" +path);
-  console.info(imagesInfoProcessorTable);
+  // we need async...
+  var find = false;
   imagesInfoProcessorTable.forEach(function(p) {
       p[0]( host, path, function(result) {
         if ( result == true ) {
-          p[1](host, path, function(images) {
-            console.log(images);
-          })
-        } else {
-
+          find = true;
+          p[1](host, path, function(error, images) {
+            callback(error, images);
+          });
         }
       });
   });
+
+  // ??? real to do?
+  if ( find == false ) {
+    callback(new Error('no processor to process current paga'), null);
+  }
 }
 
+function renderImages(images) {
+  console.log("render images for " + document.URL);
+  console.info(images);
 
-console.log("work in: " + document.URL);
-console.log("title: " + document.title);
+  var testdiv = document.createElement("div");
+  testdiv.innerHTML="<p>I inserted <em>this</em> content.</p>";
+  testdiv.id = 'wirImagesDiv';
+  // testdiv.style.background = '#0C0';
+  document.body.appendChild(testdiv);
+}
 
-getImagesInfo();
+//test();
+/*
+getImagesInfo(function(error, images) {
+  if ( error == null  ) {
+    renderImages(images);
+  } else {
+    console.info(error);
+  }
+});*/
+
+console.info(window);
