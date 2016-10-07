@@ -36,7 +36,10 @@ wir.getImagesInfo = function (callback) {
       var bigimgurl = findEleByName(img.Children, 'bigimgurl');
       var desc = findEleByName(img.Children, 'cnt_article');
       if ( bigimgurl != null && desc != null ) {
-        images.images.push({ url: bigimgurl.Children[0].Content, title: "", desc: desc.Children[0].Content });
+        var desc = desc.Children[0].Content;
+         desc = desc.replace("<p>", "");
+         desc = desc.replace("</p>", "");
+        images.images.push({ url: bigimgurl.Children[0].Content, title: "", desc: desc });
       }
     });
 

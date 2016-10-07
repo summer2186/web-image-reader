@@ -1,9 +1,0 @@
-#wirImagesDiv{
-  width:100%;
-  position:absolute;
-  top:0px;
-  left: 0px;
-  background-color: red;
-  z-index: 999;
-  margin-top:expression(this.style.pixelHeight+document.documentElement.scrollTop);
-}

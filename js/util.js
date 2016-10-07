@@ -16,6 +16,21 @@ function getImagesInfoProvider() {
     return window.wir.getImagesInfo;
   }
   else {
-    return window.wir.otherGetImagesInfo;
+    return window.wir.otherGetAllImages;
   }
+}
+
+function getImgNaturalDimensions(img, callback) {
+    var nWidth, nHeight
+    if (img.naturalWidth) { // 现代浏览器
+        nWidth = img.naturalWidth
+        nHeight = img.naturalHeight
+    } else { // IE6/7/8
+        var imgae = new Image()
+        image.src = img.src
+        image.onload = function() {
+            callback(image.width, image.height)
+        }
+    }
+    return [nWidth, nHeight]
 }

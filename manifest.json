@@ -20,13 +20,18 @@
     "content_scripts": [
       {
         "matches": ["http://*/*"],
-        "css": ["wir-main.css"],
-        "js": ["js/other-web.js", "js/jquery-3.1.1.min.js", "js/util.js"],
+        "css": ["css/popup_view.css", "css/wir-main.css"],
+        "js": ["js/other-web.js", "js/jquery-3.1.1.min.js", "js/util.js", "js/popup_view.js"],
+        "run_at": "document_idle"
+      },
+      {
+        "matches" : ["*://news.163.com/photoview/*"],
+        "js": ["js/tx-images-news.js"],
         "run_at": "document_idle"
       },
       {
         "matches": ["*://news.qq.com/a/*"],
-        "js": ["js/tx-images-news.js"],
+        "js": ["js/netease-image-news.js"],
         "run_at": "document_idle"
       }
     ]

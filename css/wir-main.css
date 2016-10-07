@@ -1,0 +1,41 @@
+#wirImagesDiv{
+  width:100%;
+  position:absolute;
+  top:0px;
+  left: 0px;
+  background-color: red;
+  z-index: 999;
+  margin-top:expression(this.style.pixelHeight+document.documentElement.scrollTop);
+}
+
+.wirBody {
+  background-color: black
+}
+
+.wirTitle {
+    height: 70px;
+    position: relative;
+    margin: 0 92px;
+    z-index: 4;
+}
+
+.wirTitleFont {
+  color: white;
+  font: 26px/70px "Microsoft YaHei",arial;
+}
+
+.wirTable {
+  width: 100%;
+}
+
+.wirTR {
+  text-align: center;
+  vertical-align: top;
+}
+
+.wirTD {
+  color: white;
+  font: 15px/20px "Microsoft YaHei", arial;
+  text-align: center;
+  vertical-align: top;
+}
