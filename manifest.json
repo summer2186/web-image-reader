@@ -25,7 +25,7 @@
         "run_at": "document_idle"
       },
       {
-        "matches" : ["*://news.163.com/photoview/*"],
+        "matches" : ["*://news.163.com/photoview/*", "*://discovery.163.com/photoview/*"],
         "js": ["js/netease-image-news.js"],
         "run_at": "document_idle"
       },
