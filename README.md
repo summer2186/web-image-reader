@@ -10,6 +10,10 @@
 
 对于不支持网站，直接显示当前页面的所有图片。
 
+该插件的地址：
+
+[https://chrome.google.com/webstore/detail/laonomdoacgigmbchoaafddjjcenookb](https://chrome.google.com/webstore/detail/laonomdoacgigmbchoaafddjjcenookb)
+
 ## 效果
 
 开启插件之前，页面使用的是幻灯片播放器来播放图片
