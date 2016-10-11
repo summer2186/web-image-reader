@@ -1,30 +1,3 @@
-
-
-
-// 获取所有的图片信息
-function getImagesInfo(callback) {
-  var host = window.location.host;
-  var path = window.location.pathname;
-  var imagesInfo = null
-  // we need async...
-  var find = false;
-  imagesInfoProcessorTable.forEach(function(p) {
-      p[0]( host, path, function(result) {
-        if ( result == true ) {
-          find = true;
-          p[1](host, path, function(error, images) {
-            callback(error, images);
-          });
-        }
-      });
-  });
-
-  // ??? real to do?
-  if ( find == false ) {
-    callback(new Error('no processor to process current paga'), null);
-  }
-}
-
 function removeElements(els) {
   for (var i = els.length - 1; i > -1; i--) {
     var el = els[i];
@@ -35,59 +8,6 @@ function removeElements(els) {
 function renderImages(images) {
   console.log("render images for: " + window.wir.name + " URL:" + document.URL);
   console.info(images);
-
-  /*var testdiv = document.createElement("div");
-  testdiv.innerHTML="<p>I inserted <em>this</em> content.</p>";
-  testdiv.id = 'myModal';
-  testdiv.className = "reveal-modal";
-  var closeLink = document.createElement("a");
-  closeLink.className = "close-reveal-modal";
-  closeLink.innerHTML = "x";
-  testdiv.appendChild(closeLink);
-  // testdiv.style.background = '#0C0';
-  document.body.appendChild(testdiv);*/
-
-  /*var d = dialog({
-        title: '欢迎',
-        content: '欢迎使用 artDialog 对话框组件！',
-        width: 460
-    });
-    d.showModal();*/
-
-    /*var index = layer.open({
-      title: images.title,
-      type: 1,
-      closeBtn: 1,
-      content: '<p>111</p><p>111</p><p>111</p><p>111</p><p>111</p><p>111</p><p>111</p><p>111</p><p>111</p><p>111</p><p>111</p><p>111</p><p>111</p><p>111</p>' +
-        '<p>111</p><p>111</p><p>111</p><p>111</p><p>111</p><p>111</p><p>111</p><p>111</p><p>111</p><p>111</p><p>111</p><p>111</p><p>111</p><p>111</p>'+
-        '<p>111</p><p>111</p><p>111</p><p>111</p><p>111</p><p>111</p><p>111</p><p>111</p><p>111</p><p>111</p><p>111</p><p>111</p><p>111</p><p>111</p>',
-      area: ['100%', '100%'],
-      maxmin: true,
-      success: function(layero, index){
-        // fix
-        var closeLink = getElementsByClassName('layui-layer-ico layui-layer-close layui-layer-close1', 'a');
-        closeLink[0].innerHTML = "[X]";
-      }
-    });
-    layer.full(index);*/
-
-    /*var testDiv = document.createElement('div');
-    testDiv.id = 'wir_images_popup';
-    testDiv.className = 'pop_up popup_hide';
-    testDiv.innerHTML = "<p>111</p><p>111</p><p>111</p><p>111</p><p>111</p><p>111</p><p>111</p><p>111</p>";
-
-    var closeDiv = document.createElement('div');
-    closeDiv.className = 'pop_up_close';
-    testDiv.appendChild(closeDiv);
-
-    document.body.innerHTML = "";
-    document.body.appendChild(testDiv);
-
-    var popupView = new popup();
-    popupView.show(document.querySelector('#wir_images_popup'), "", function () {
-        console.log('show do something');
-        window.location.reload();
-    });*/
 
     var renderAsList = function() {
       var table = document.createElement('table');
